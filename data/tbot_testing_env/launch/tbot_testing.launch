@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<launch>
+
+<!-- Bring up the husky on Gazebo in the predefined world; world will be changed, according on test purposes-->
+<include file="$(find husky_gazebo)/launch/husky_playpen.launch">
+		<!-- Run husky with kinect active 
+		Run both kinect and ur5 arm seems impossible on Gazebo, due to compatibility issues -->
+		<arg name="kinect_enabled" value="true" />
+		<arg name="ur5_enabled" value="false"/>
+
+	</include>
+
+	<!-- Bring up the husky navigation stack. It uses the frontier_exploration package
+	### It seems some error occurs using this package
+	<include file="$(find husky_navigation)/launch/exploration_demo.launch">
+	</include> -->
+
+	<!-- Bring up the husky navigation stack. It uses the SLAM gmapping package -->
+	<include file="$(find husky_navigation)/launch/gmapping.launch">
+	</include>
+
+	<!-- Running the move_base node -->
+	<include file="$(find husky_navigation)/launch/move_base.launch">
+		<arg name="no_static_map" value="true"/>
+	</include>
+
+	<!-- Running the node for photo handling (Actually is a dummy node) -->
+	<node name="photo_handler" pkg="tbot_testing_env" type="photo_handler.py" respawn="true" />
+
+
+	<!-- Bring up Rviz to send move_base_simple/Goal to the robot and monitor moving-->
+	<include file="$(find husky_viz)/launch/view_robot.launch">
+	</include>
+	<!-- To save map:  $ rosrun map_server map_saver -f <filename>-->
+</launch>

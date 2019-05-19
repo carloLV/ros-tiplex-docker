@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="index.css" />
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script src="http://d3js.org/d3.v3.js"></script>
+
+  <script src="../roslib.js"></script>
+  <script src="../eventemitter2.js"></script>
+  <script src="./indexPage.js"></script>
+</head>
+<style>
+  .left-buffer { margin-left:20px; }
+</style>
+
+<body>
+  <div class="container-fluid" id="super">
+    <h2>This is the admin page for planning</h2>
+    <p>Insert the name of the State Variables you want to set up for you model</p>
+    <form id="namesInput" onkeypress="return event.keyCode != 13">
+      <label for="stateVar">State Variable Name</label>
+    	<input type="text" id="stateVar" name="stateVar" placeholder="Your state variable name">
+    	<button id="addSVName" class="button" onclick="addSV2workspace()" type="button">Add this var</button>
+    </form>
+    <h2 class="display-3">Your State Variables you need to edit</h2>
+    <p>Click on the State variable you want to edit</p>
+    <div id="workspace" class="list-group">
+
+    </div>
+    <h2 class="display-3">Click button below to show SV edited and add <strong>Synchronization constraints.</strong></h2>
+		<button id="updateButton" class="button" onclick="resume()">Resume</button>
+    
+    <div id = "edited"></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="graph-creator.css" />
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script src="http://d3js.org/d3.v3.js"></script>
+	<script src="./editPage.js"></script>
+	<script>
+			function getTitle(){
+				var w=1000, h=500
+				var title = document.title
+				var object = window.localStorage.getItem(document.title);
+			//***********************//
+			//First present data we have
+			var actualObj = d3.select('body')
+			.select('#presentation')
+			.select('p')
+			.html('<h2>'+object+'</h2>')}
+		</script>	
+
+</head>
+
+<body>
+	<div class='container-fluid'>
+	<div>
+			<p>Names of States must be Unique for all State Variables</p>
+			<p>Declare your status paying attention</p>
+			<p>Declare your links paying attention</p>
+	</div>
+		<button class="btn btn-danger" onclick="getTitle()">Show current State Variable</button>
+		<div id='presentation'>
+			<p class="text-center bg-info"></p>
+		</div>
+
+		<h3>Append your links</h3>
+	<div id="myForm">
+		<button class="btn btn-danger" onclick="handleClick()">Add link</button>
+		<input type="text" id="nodeVal" placeholder="Add source node name&hellip;"/>
+		<input type="text" id="linksVal" placeholder="Add target node name&hellip;"/>
+		<select id="topics" name="topics"></select>
+		<input type="radio" id="topicType" name="group-radio" value="pub"/> PUB
+  	<input type="radio" id="topicType" name="group-radio" value="sub"/> SUB
+  	<input type="radio" id="topicType" name="group-radio" value="none"/> NONE<br>
+	</div>
+	<h4>Your added Links are:</h4>
+	<ul></ul>
+
+	<button class="btn btn-warning" onclick="getDataset()">Show Graph</button>
+	<input type="text" id="topicEdge" placeholder="Topic hovered edge"></input>
+
+	<div id="workingArea" class='row'>
+		<div id="chart" class="col col-md-8"></div>
+		<h3 id="actualName"></h3>
+		<div id="nodeEditing" class="col col-md-4 ">		
+			</div>
+		</div>
+		
+		<button class="btn btn-danger" onclick="endEditing()">Confirm operations</button>
+	</div>
+
+	<!-- 
+	This script simply populates the selection menu where we can choose feedbacks topic
+	-->
+	<script>
+	var objects = JSON.parse(window.localStorage.getItem('feedback')); //Get [{topic: t1, message: m1}, {...}, ...]
+	topics = []
+	for (index in objects)
+		topics.push(objects[index].topic);
+	var select = d3.select('#myForm')
+	.select('#topics')
+
+	var options = select
+	.selectAll('option')
+	.data(topics).enter()
+	.append('option')
+	.text(function(d){return d});
+</script>
+</body>
+</html>

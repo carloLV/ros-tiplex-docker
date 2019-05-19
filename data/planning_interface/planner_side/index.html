@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="index.css" />
+  <!-- Latest compiled and minified CSS 
+  -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script src="http://d3js.org/d3.v3.js"></script>
+
+  <script src="../roslib.js"></script>
+  <script src="../eventemitter2.js"></script>
+  <script src="./indexPage.js"></script>
+</head>
+
+<body>
+  <div class="container-fluid" id="super">
+    <h2 style="font-weight: strong;">Planner Side configuration</h2>
+    <p>Modify State Variable given from the Robot Side </p>
+    <p>Drag nodes for better visualization </p>
+    <p>To restore first state hit <strong>Revert All Changes</strong> </p>
+    <p>To display edited State Var hit <strong>Reload</strong> </p>
+    <p>When you finish hit <strong>Summary and save</strong> </p>
+
+    <div class="row" id="panelContainer">
+      <div id="buttonPan" class="col-md-2" >
+      <h3>State Variables</h3></div>
+      <div id="workingPan" class="col-md-8"><h3>Working Area</h3>
+        <svg></svg>
+      </div>
+      <div class="col-md-2"><h3>Tool Panel</h3>
+        <input class="panelButton" type="button" value="Merge Nodes" onclick="mergeOperation()"/>
+        <input class="panelButton" type="button" value="Revert all changes" onclick="resetStateVariables()"/>
+        <input class="panelButton" type="button" value="Reload" onclick="reloadPanel()"/>
+        <input class="button" type="button" style="background-color: #82b74b" value="Summary and save" onclick="resumeVariables()"/>
+      </div>
+    </div>
+    <div id="operations" class="row"></div>
+    </div>
+</body>
+</html>

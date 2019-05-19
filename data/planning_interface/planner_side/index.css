@@ -1,0 +1,84 @@
+.button {
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-bottom:15px
+}
+body {font-family: monospace; 
+    line-height: 160%; 
+    font-size: 18px; 
+}
+.container-fluid{
+    overflow: auto; 
+    }
+.svContainer {
+    border: 4px solid grey;
+    border-radius: 8px;
+    background-color: lightgrey;
+}
+.removeButton{
+    position:absolute;
+    background-color: red;
+    width: 10;
+    height: 10;
+    top: 0;
+    right: 0;
+}
+path.link {
+  fill: none;
+  stroke: #666;
+  stroke-width: 1.5px;
+}
+
+circle {
+  fill: #ccc;
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+text {
+  fill: #000;
+  font: 14px sans-serif;
+  pointer-events: none;
+}
+
+select {
+    width: 20%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+div.tooltip {   
+         
+    text-align: center;             
+    font-size: 15px;        
+    background: lightblue;   
+    border: 1.5px solid grey;   
+    border-radius: 4px;                     
+}
+
+.panelButton {
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-bottom:15px;
+    background-color: #034f84;
+}

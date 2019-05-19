@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="index.css" />
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script src="http://d3js.org/d3.v3.js"></script>
+
+  <script src="../roslib.js"></script>
+  <script src="../eventemitter2.js"></script>
+  <script src="./resumePage.js"></script>
+</head>
+<body>
+	<div class="container-fluid" id="super">
+    <h2>Your state Variables</h2>
+    <p>Select the SV you want to plan on</p>
+    <div id="allStateVar" class="list-group"></div>
+    <h2>The SV you will send to the planner</h2>
+    <div id="selectedStateVar" class="list-group"></div>
+    <br>
+    <h2>Add Synchronization rules using buttons</h2>
+    <div class="btn-group" role="group" aria-label="Basic example">
+    <button type="button" class="btn btn-secondary" onclick="addBeforeSync()">Before </button>
+      <button type="button" class="btn btn-secondary" onclick="addDuringSync()">During </button>
+      <button type="button" class="btn btn-secondary" onclick="addMeetsSync()">Meets</button>
+    </div>
+    <div id="synchronization">
+    </div>
+    <br>
+  </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="index.css" />
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script src="http://d3js.org/d3.v3.js"></script>
+	<script src="./editPage.js"></script>
+
+</head>
+
+<body>
+	<div class='container-fluid'>
+	<h1></h1>
+	<input class="button" type="button" value="Show graph" style="background-color: #82b74b" onclick="drawModifiedGraph()"/>
+	  <div class="row" id="savePanel">
+    	<div id="modifyArea" class="col-md-8" >
+      	<svg></svg>
+    	</div>
+    	<div id="nodeEditing" class="col-md-4">
+      </div>
+    </div>
+    <br>
+    <br>
+    <div id="syncRule"></div>
+    
+	</div>
+</body>
+</html>

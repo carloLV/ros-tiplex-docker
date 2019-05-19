@@ -1,0 +1,24 @@
+select {
+    width: 20%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+body {
+  font: 13px sans-serif;
+}
+
+ul {
+  list-style: none;
+  font-weight: bold;
+}
+
+li {
+  margin:  0.2em 0.0em;
+  padding: 0.5em 1.0em;
+  font-weight: normal;
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+	<!-- Run the mongoDB node from terminal using following commands:
+		$ rosparam set mongodb_port 62345
+		$ rosparam set mongodb_host localhost
+		$ rosrun mongodb_store mongodb_server.py
+
+		Then in other terminal run this file to bringup the tool
+		$ roslaunch robot_knowledge_base knowledge_base.launch
+	-->
+
+<launch>
+
+	<!--<node name="back_robot_side" pkg="robot_knowledge_base" type="back_robot_side.py" respawn="false" output="screen">
+	</node>
+	<node name="back_planner_side" pkg="robot_knowledge_base" type="back_planner_side.py" respawn="false" output="screen">
+	</node>-->
+
+	<!-- Launch the node between the web interface and ROS system on robot side.-->
+	<node name="kb_admin" pkg="robot_knowledge_base" type="back_robot_side.py" respawn="true" />
+
+	<include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch">
+	</include>
+
+	<node name="rosplan_scene_message_store" pkg="mongodb_store" type="message_store_node.py" respawn="false" output="screen">
+	</node>
+
+</launch>

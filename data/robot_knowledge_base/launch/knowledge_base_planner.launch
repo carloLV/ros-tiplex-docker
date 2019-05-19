@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+	<!-- Launch the node between the web interface and ROS system on planner side.-->
+	<node name="back_planner_side" pkg="robot_knowledge_base" type="back_planner_side.py" respawn="false" output="screen">
+	</node>
+
+	<include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch">
+	</include>
+
+	<node name="rosplan_scene_message_store" pkg="mongodb_store" type="message_store_node.py" respawn="false" output="screen"></node>
+
+</launch>
