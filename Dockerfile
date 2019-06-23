@@ -1,5 +1,7 @@
 FROM ros:indigo-robot
 
+LABEL mantainer="carlo.laviola@gmail.com"
+
 # Install needed software
 RUN apt-get update && \
     apt-get upgrade -y && \
@@ -34,18 +36,10 @@ RUN mkdir -p /opt/ros/mongodb_store && \
 
 WORKDIR /home/developer
 
-#NOT WORKING IN DOCKERFILE
-#CMD source /opt/ros/indigo/setup.bash && \
-#    mkdir -p ./catkin_ws/src && \
-#    cd ./catkin_ws &&\
-#    catkin_make
-    
 # Change user and set up the environment variables
 USER developer
 
-ENV HOME /home/developer
+ENV HOME=/home/developer
 # Set up Husky simulator for the use case
 ENV HUSKY_GAZEBO_DESCRIPTION=/opt/ros/indigo/share/husky_description/urdf/description.gazebo.xacro
-
-
 

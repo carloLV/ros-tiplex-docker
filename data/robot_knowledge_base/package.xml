@@ -2,7 +2,8 @@
 <package>
   <name>robot_knowledge_base</name>
   <version>0.0.0</version>
-  <description>The robot_knowledge_base package contains all the logic to configure the Planning and Scheduling domain and link the ROS robot with PLATINUm(a high level P&S)</description>
+  <description>The robot_knowledge_base package contains all the logic to configure the Planning and Scheduling 
+  domain and link the ROS robot with PLATINUm(a high level P and S)</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->

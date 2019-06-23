@@ -17,7 +17,7 @@
 	</node>-->
 
 	<!-- Launch the node between the web interface and ROS system on robot side.-->
-	<node name="kb_admin" pkg="robot_knowledge_base" type="back_robot_side.py" respawn="true" />
+	<node name="kb_admin" pkg="robot_knowledge_base" type="back_robot_side.py" respawn="true" output="screen"/>
 
 	<include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch">
 	</include>
