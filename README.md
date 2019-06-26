@@ -21,4 +21,8 @@ You'll be logged in. Now run this two commands:
 `cd /app/planning_interface`     
 `python -m SimpleHTTPServer 9000`.
 
-Now in your browser, in the URL search bar write `localhost:9000` and you will se the data in the docker. From this point on you can start to use the tool.
+Now in your browser, in the URL search bar write `localhost:9000` and you will se the data in the docker. IF something is not working, maybe you should wait for all the nodes to start passing data.
+From this point on you can start to use the tool.
+
+## Known issue
+RVIZ node is not perfectly working during the first run. If you close all the nodes and re-run the script `./start_nodes.sh` a second time, even RVIZ will be ok.
