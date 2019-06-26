@@ -40,3 +40,12 @@ xterm -hold -e 'cd ./catkin_ws && \
                 roslaunch robot_knowledge_base knowledge_base_robot.launch' &
                 
 echo 'ROBOT_KNOWLEDGE_BASE node is up!!\n'
+
+sleep 3
+
+echo 'Running PLANNER_KNOWLEDGE_BASE node'
+xterm -hold -e 'cd ./catkin_ws && \
+                source devel/setup.bash && \
+                roslaunch robot_knowledge_base knowledge_base_planner.launch' &
+                
+echo 'PLANNER_KNOWLEDGE_BASE node is up!!\n'
