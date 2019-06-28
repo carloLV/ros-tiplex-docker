@@ -1,28 +1,59 @@
-# ros-tiplex-docker
+# ROS-TiPlEx on docker
 This folder contains the settings to create a docker image of ROS-TiPlEx, 
 the engineering tool that lets robotic expert and planning experts to communicate and cooperate.
 
-# Bring upd the environment
-1. First of all, clone this repo in your local machine, then navigate inside the repo and run:      
-`docker built -t rostiplex:latest .`
+
+## Installation
+You need [Docker](https://www.docker.com/) installed in order to run this demo.
+
+## Run the docker
+Open a terminal we'll call **A** and clone this repo in your local machine, then navigate inside the repo and build the *docker image*.
+```
+git clone https://github.com/carloLV/ros-tiplex-docker.git
+cd ros-tiplex-docker
+docker built -t rostiplex:latest .
+```
 The image will be also available on the docker hub for download but so far this is the only way to get it.
 
-2. Once your image is built, you can start the docker and start working on it. Run this command to run the docker. Add the `--rm` argument if you want to destroy the docker on exit. To simply run the docker:     
+Now you can run the docker and start working on it. Add the `--rm` argument to the command below if you want to destroy the docker on its exit.     
 
-`docker run -it -e DISPLAY=unix$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -p 9000:9000 -p 9090:9090 rostiplex:latest`
+```
+docker run -it 
+  -e DISPLAY=unix$DISPLAY 
+  -v /tmp/.X11-unix:/tmp/.X11-unix 
+  -p 9000:9000 -p 9090:9090 
+  rostiplex:latest
+```
+In a new terminal **B** run these commands, so that you create a new connection to the docker for later use.
+First run `docker ps` and copy the name of the active docker related to this image
+```
+docker exec -it docker_name /bin/bash
+```
 
-3. When you are logged in the docker, there is some prepwork to set upp all the environment and be able to run the system. First of all run: `/app/env-entrypoint.sh `.     
-You should see the building process of **catkin_make** in action.    
+## Create ROS working environment
+When you are logged in the docker, run:
+```
+/app/env-entrypoint.sh 
+```
+This script creates an environment for ROS and copies some data inside it. Then, we build the environment with **catkin_make**.
+You should see on console the output of the building process.
 
-4. Now the setup is finished, and you can start the nodes running the dedicated script, with this command: `./start_nodes.sh`
+What is left is the start of all the nodes that partecipate to the demo, running the dedicated script:
+```
+./start_nodes.sh
+```
 
-5. The last step is to run the python server in order to be able to use the provided interface. To run the server start opening a new terminal and connecting to the docker using: `docker exec -it *docker_name* /bin/bash`.
-You'll be logged in. Now run this two commands:     
-`cd /app/planning_interface`     
-`python -m SimpleHTTPServer 9000`.
+## Run the Demo
+On terminal **B** run the *python server* that will forward the ROS information.     
+```
+cd /app/planning_interface    
+python -m SimpleHTTPServer 9000
+```
 
-Now in your browser, in the URL search bar write `localhost:9000` and you will se the data in the docker. IF something is not working, maybe you should wait for all the nodes to start passing data.
+Now write in the URL search of your browser `localhost:9000` and you will se the data in the docker. If something is not working, you should wait for all the nodes to start passing data.
 From this point on you can start to use the tool.
 
-## Known issue
+#### Known issue
 RVIZ node is not perfectly working during the first run. If you close all the nodes and re-run the script `./start_nodes.sh` a second time, even RVIZ will be ok.
+
+For details on ROS-TiPlex visit the [wiki](https://github.com/carloLV/ROS-TiPlEx/wiki)
