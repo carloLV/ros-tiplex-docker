@@ -11,7 +11,7 @@ Open a terminal we'll call **A** and clone this repo in your local machine, then
 ```
 git clone https://github.com/carloLV/ros-tiplex-docker.git
 cd ros-tiplex-docker
-docker built -t rostiplex:latest .
+docker build -t rostiplex:latest .
 ```
 The image will be also available on the docker hub for download but so far this is the only way to get it.
 
