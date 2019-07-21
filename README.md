@@ -4,7 +4,8 @@ the engineering tool that helps robotic experts and planning experts to communic
 
 
 ## Installation
-You need [Docker](https://www.docker.com/) installed in order to run this demo.
+You need [Docker](https://www.docker.com/) installed in order to run this demo.    
+Please note that th installation currently works only on Linux OS, because the `docker run` command requires a different mapping of the DISPLAY variable to work on other OS.
 
 ## Run the docker
 Open a terminal we'll call **A** and clone this repo in your local machine, then navigate inside the repo and build the *docker image*.
@@ -32,7 +33,7 @@ docker exec -it docker_name /bin/bash
 ```
 
 ## Create ROS working environment
-When you are logged in the docker, run:
+When you are logged in the docker, on terminal **A**, run:
 ```
 /app/env-entrypoint.sh 
 ```
