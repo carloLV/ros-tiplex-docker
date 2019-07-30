@@ -5,7 +5,7 @@ the engineering tool that helps robotic experts and planning experts to communic
 
 ## Installation
 You need [Docker](https://www.docker.com/) installed in order to run this demo.    
-Please note that th installation currently works only on Linux OS, because the `docker run` command requires a different mapping of the DISPLAY variable to work on other OS.
+Please note that the installation currently works only on Linux OS. The arguments  `-e` and `-v` should be changed according to your machine to connect to the X11-server.
 
 ## Run the docker
 Open a terminal we'll call **A** and clone this repo in your local machine, then navigate inside the repo and build the *docker image*.
