@@ -3,8 +3,7 @@ FROM ros:indigo-robot
 LABEL mantainer="carlo.laviola@gmail.com"
 
 # Install needed software
-RUN apt-key update &&\
-    apt-get update &&\
+RUN apt-get update &&\
     apt-get install -y  \
     build-essential \
     ros-indigo-rosbridge-server \
