@@ -3,11 +3,10 @@ FROM ros:indigo-robot
 LABEL mantainer="carlo.laviola@gmail.com"
 
 # Install needed software
-RUN apt-get update && \
-    apt-get upgrade -y && \
+RUN apt-key update &&\
+    apt-get update &&\
     apt-get install -y  \
     build-essential \
-    nano \
     ros-indigo-rosbridge-server \
     ros-indigo-husky-simulator \
     ros-indigo-husky-navigation \
