@@ -32,7 +32,7 @@ xterm -hold -e 'cd ./catkin_ws && \
 echo 'TEST_BOT node is up!!\n'
 
 # Wait for TEST ENV to be up
-sleep 3
+sleep 20
 
 echo 'Running ROBOT_KNOWLEDGE_BASE node'
 xterm -hold -e 'cd ./catkin_ws && \
