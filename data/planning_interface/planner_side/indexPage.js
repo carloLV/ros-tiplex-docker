@@ -34,19 +34,17 @@ var listener = new ROSLIB.Topic({
 });
 
 listener.subscribe(function(message) {
-  //If it is the first time we use the page
-  if (window.localStorage.getItem('stateVariables')==null){
-    var stateVarsList = extractSVfromMsg(message);
-    window.localStorage.setItem('stateVariables',JSON.stringify(stateVarsList))//We save state variables on accessible memory
-     var allStatesInfo = [];
-    var allSV = JSON.parse(window.localStorage.getItem('stateVariables'));
-    allSV.forEach(function(d){
-      allStatesInfo = allStatesInfo.concat(d.states);
-    })
-    window.localStorage.setItem('allStatesInfo',JSON.stringify(allStatesInfo));
-    window.localStorage.setItem('editedStateVar','[]')
-    }
- 
+  //IWill get info only one time and then unsubscribe from the publisher
+  var stateVarsList = extractSVfromMsg(message);
+  window.localStorage.setItem('stateVariables',JSON.stringify(stateVarsList))//We save state variables on accessible memory
+   var allStatesInfo = [];
+  var allSV = JSON.parse(window.localStorage.getItem('stateVariables'));
+  allSV.forEach(function(d){
+    allStatesInfo = allStatesInfo.concat(d.states);
+  })
+  window.localStorage.setItem('allStatesInfo',JSON.stringify(allStatesInfo));
+  window.localStorage.setItem('editedStateVar','[]')
+
   robotSideConf();
 
   listener.unsubscribe();
@@ -65,20 +63,20 @@ var publisher = new ROSLIB.Topic({
 /************************************/
 
 function extractSVfromMsg(message){
-  /* 
+  /*
   * Reads the message from ROS and creates object list. Each object represents a State Variable
   */
   stateVarList = []
   stateVars = message.data
   for (index in stateVars){
-    var sv = JSON.parse(stateVars[index]);//Converts the string in json obj for a better handling 
+    var sv = JSON.parse(stateVars[index]);//Converts the string in json obj for a better handling
     stateVarList.push(sv)
   }
   return stateVarList
 }
 
 function robotSideConf(){
-  /*  
+  /*
   * Creates buttons to select state variables; if clicked button disappears
   * Clicking on buttons draws the corresponding graph, using the function @drawInitialGraphs
   */
@@ -136,7 +134,7 @@ function drawInitialGraphs(sv){
   var svg = workArea.select("svg")
     .attr("width", w)
    .attr("height", h);
-  
+
   links.forEach(function(link) {
     link.source = initialNodes[link.source] || (initialNodes[link.source] = {name: link.source});
     link.target = initialNodes[link.target] || (initialNodes[link.target] = {name: link.target});
@@ -239,15 +237,15 @@ function drawInitialGraphs(sv){
         var dx = d.target.x - d.source.x,
             dy = d.target.y - d.source.y,
             dr = Math.sqrt(dx * dx + dy * dy);
-        return "M" + 
-            d.source.x + "," + 
-            d.source.y + "A" + 
-            dr + "," + dr + " 0 0,1 " + 
-            d.target.x + "," + 
+        return "M" +
+            d.source.x + "," +
+            d.source.y + "A" +
+            dr + "," + dr + " 0 0,1 " +
+            d.target.x + "," +
             d.target.y;
     });
     node
-        .attr("transform", function(d) { 
+        .attr("transform", function(d) {
         return "translate(" + d.x + "," + d.y + ")"; });
   }
 }
@@ -257,7 +255,7 @@ function drawInitialGraphs(sv){
 * In the last version we advice to NOT give states same names. Thats more convenient than modify.
 
 function updateStateInfo(id, newId){
-  
+
   var allStates = JSON.parse(window.localStorage.getItem('allStatesInfo'));
   console.log(allStates);
   var state = allStates.find(function(el){return el.id==id});
@@ -314,12 +312,12 @@ function mergeOperation(){
         d3.select(this).style('fill','blue');
         nodesToMerge.push(d.name);
        //Can merge no more than 2 nodes
-        }  
+        }
       if (color.b == 255){
         d3.select(this).style('fill','red');
         nodesToMerge = nodesToMerge.filter(function(el){ return el!=d.name})
         }
-      }); 
+      });
 }
 function activateMerging(){
   /*
@@ -348,11 +346,11 @@ function activateMerging(){
     }
 
     for (index in tempLinks){
-      var link = tempLinks[index]; 
+      var link = tempLinks[index];
 
       var src = link.source.name,
           tgt = link.target.name;
-      
+
       /* Still code for previous version.Reccomend not to use it
       var src2 = updateNameVersion(src),
           tgt2 = updateNameVersion(tgt);
@@ -363,7 +361,7 @@ function activateMerging(){
       if (nodesToMerge.indexOf(tgt) >= 0 ){
         modifiedLinks.push({source: src, target: newNodeName, topic: link.topic, message: link.message, type:link.type})
         }
-      if (nodesToMerge.indexOf(tgt) < 0 && nodesToMerge.indexOf(src) < 0 ) 
+      if (nodesToMerge.indexOf(tgt) < 0 && nodesToMerge.indexOf(src) < 0 )
         modifiedLinks.push({source: src, target: tgt, topic: link.topic, message: link.message, type:link.type});
       }
 
@@ -374,7 +372,7 @@ function activateMerging(){
       window.localStorage.setItem('conversionDict',JSON.stringify(convertingDictionary));
       //Reset these variables to modify for other possible changing
       modifiedLinks = [];
-      modifiedSyncRule = []; 
+      modifiedSyncRule = [];
       convertingDictionary = [];
       window.open('./edit.html','_blank');
 }
@@ -401,7 +399,7 @@ function reloadPanel(){
 
 function resumeVariables(){
   /*
-  * Opens a page that presents all the SV edited at their final state. These SV will be saved 
+  * Opens a page that presents all the SV edited at their final state. These SV will be saved
   * on MongoDB and used to build the ddl file.
   */
   window.open('./resume.html','_blank');

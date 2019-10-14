@@ -52,7 +52,7 @@ class DDLGenerator:
 				self._syncronization.append(el)
 				self._timelines.append(name)
 			#print syncRules
-		except AttributeError:
+		except (AttributeError, KeyError):
 			print 'No Synchronization rule'
 		all_states=''
 		states_description =[] #This list contains all the state structure to build SV description
@@ -152,6 +152,8 @@ class DDLStateVarStructure:
 		@input: the string of durability in format of type '4-7'
 		@output: the string formatted for ddl language
 		"""
+		if not string_dur:
+		    return ""
 		bounds = string_dur.split('-')
 		start = bounds[0]
 		end = bounds[1]

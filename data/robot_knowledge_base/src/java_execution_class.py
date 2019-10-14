@@ -8,6 +8,7 @@ from rospy.numpy_msg import numpy_msg
 import mongodb_interface
 import json
 import sys
+import os
 
 _write_directory = './java_execution/'
 
@@ -19,7 +20,7 @@ class ExecutionClassCreator:
 		self._publicators = {} # key: SV, value: tuples (topic, type, ). corresponds to msgs published by planner for each SV
 		self._subscriptors = {} # key: SV, value: tuples (topic, type, ). corresponds to msgs subscribed by planner for each SV
 		self.build_java_methods()
-	
+
 	def build_java_methods(self):
 		complex_message = self._db.read_robot_sv("planner_side")
 		self._message = complex_message[0].data
@@ -28,10 +29,10 @@ class ExecutionClassCreator:
 		#print self._publicators, self._subscriptors
 
 	def set_pub_sub(self, state_var):
-		sv = json.loads(state_var)		
+		sv = json.loads(state_var)
 		if sv in self._publicators.keys():
 			print 'Something wrong: State Var already checked in publicators'
-			return 
+			return
 		if sv in self._subscriptors.keys():
 			print 'Something wrong: State Var already checked in subscriptors'
 			return
@@ -98,9 +99,16 @@ class ExecutionClassCreator:
 			name = sv['stateVar']
 			my_class=self.java_class_creator(st_v)
 			try:
-				current_java_class = open(_write_directory+name+'.java', 'w')
-				current_java_class.write(my_class)
-				rospy.loginfo('Wrote on file with SUCCESS, Exiting ...')
+				filename = _write_directory+name+'.java'
+				if not os.path.exists(os.path.dirname(filename)):
+					try:
+						os.makedirs(os.path.dirname(filename))
+					except OSError: # Guard against race condition
+						rospy.loginfo('Error in path occurred')
+
+				with open(filename, "w") as f:
+					f.write(my_class)
+					rospy.loginfo('Wrote on file with SUCCESS, Exiting ...')
 			except IOError:
 				rospy.loginfo('Unable to open or write in ddl file.')
 		#sys.exit(0)
@@ -112,4 +120,3 @@ if __name__ == '__main__':
 		node.run_node()
 	except rospy.ROSInterruptException:
 		pass
-
