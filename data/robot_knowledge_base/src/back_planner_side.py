@@ -1,12 +1,10 @@
 #!/usr/bin/env python
 
-from std_msgs.msg import String
 from robot_knowledge_base.msg import StringArray
 import rospy
 import numpy
 from rospy.numpy_msg import numpy_msg
 import mongodb_interface
-import json
 
 class BackPlannerSide:
 

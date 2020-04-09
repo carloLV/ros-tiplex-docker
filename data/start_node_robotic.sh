@@ -10,20 +10,6 @@ echo 'ROSCORE node is up!!\n'
 # Wait for master to be up
 sleep 3
 
-echo 'Running MONGODB node'
-xterm -hold -e 'cd ./catkin_ws && \
-                source devel/setup.bash && \
-                rosparam set mongodb_port 62345 && \
-                rosparam set mongodb_host localhost && \
-                chown developer: /opt/ros/mongodb_store && \
-                chmod u+w /opt/ros/mongodb_store && \
-                rosrun mongodb_store mongodb_server.py' &
-
-echo 'MONGODB node is up!!\n'
-
-# Wait for MONGODB to be up
-sleep 3
-
 echo 'Running TEST_BOT node'
 xterm -hold -e 'cd ./catkin_ws && \
                 source devel/setup.bash && \

@@ -1,9 +1,4 @@
-import rospy
-import mongodb_store_msgs.srv as dc_srv
-import mongodb_store.util as dc_util
-from mongodb_store.message_store import MessageStoreProxy
-from robot_knowledge_base.msg import StringArray
-import StringIO
+import io, json, os
 
 class MongoDBInterface:
 
@@ -16,34 +11,28 @@ class MongoDBInterface:
 		"""
 		Initialize the class creating a DB connection thanks to a @MessageStoreProxy
 		"""
-		self._msg_store = MessageStoreProxy()
-		#self._all_state_var = [] #saves all state var name for later usage
-		rospy.loginfo('The DB node has been Created') 
+		self._curr_dir = os.getcwd()
 
 	def write_robot_sv(self, data, side):
 		"""
-		Writes passed data on db.
+		Writes JSON data on a file.
 
 		@params: the ROS message containing the list of strings (JSON like) of configuration
 						 the @side to save this configuration: could be robot_side or planner_side
 		"""
-		try:
-			data_id = self._msg_store.insert_named(side, data)
-			print ' Wrote with success'
-		except rospy.ServiceException, e:
-			print "Service call failed: %s"%e
+		file_path = "json_data/" + side + ".txt"
+		with io.open(os.path.join(self._curr_dir, file_path), 'w', encoding='utf-8') as f:
+			info = json.dumps(data, ensure_ascii=False)
+			f.write(unicode(info))
 
 	def read_robot_sv(self, side):
 		"""
-		Reads data on db.
+		Reads data from file.
 
 		@params: The side to read the configuration: could be robot_side or planner_side
+		@return: the JSON objects contained in the file
 		"""
-		try:
-			print 'reading'
-			return self._msg_store.query_named(side, StringArray._type)
-			print 'Read with success'
-		except rospy.ServiceException, e:
-			print "Service call failed: %s"%e
-
-
+		file_path = "json_data/" + side + ".txt"
+		with io.open(os.path.join(self._curr_dir, file_path), 'r', encoding='utf-8') as f:
+			info = json.loads(f.read())
+		return info

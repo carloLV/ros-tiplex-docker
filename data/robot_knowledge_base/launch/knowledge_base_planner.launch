@@ -7,6 +7,4 @@
 	<include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch">
 	</include>
 
-	<node name="rosplan_scene_message_store" pkg="mongodb_store" type="message_store_node.py" respawn="false" output="screen"></node>
-
 </launch>

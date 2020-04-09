@@ -21,6 +21,7 @@ Now you can run the docker and start working on it. Remove the `--rm` argument t
 docker run -it --rm \
        -e DISPLAY=unix$DISPLAY \
        -v /tmp/.X11-unix:/tmp/.X11-unix \
+       -v "$(pwd)"/data:/app \
        -p 9000:9000 \
        -p 9090:9090 \
        rostiplex:latest

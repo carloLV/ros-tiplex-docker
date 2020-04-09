@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 from helpers import scouter
-from std_msgs.msg import String
 from robot_knowledge_base.msg import StringArray
 import rospy
 import numpy
@@ -58,7 +57,7 @@ class BackRobotSide:
 		rospy.Subscriber('config_robot_side_receiver',numpy_msg(StringArray), self.on_data_passing)
 		self.publish()
 		rospy.spin()
-		
+
 if __name__ == '__main__':
 	node = BackRobotSide()
 	try:
