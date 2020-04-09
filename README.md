@@ -56,4 +56,6 @@ From this point on you can start to use the tool.
 It seems that the first time it runs, RVIz doesn't find the variable `HUSKY_GAZEBO_DESCRIPTION`.
 1. When closing all the xterm of he nodes, sometimes the one related to MongoDB can not be closed. You should kill the related process instead.
 
-For details on ROS-TiPlex visit the [wiki](https://github.com/carloLV/ROS-TiPlEx/wiki)
+For details on ROS-TiPleX visit the [wiki](https://github.com/carloLV/ROS-TiPlEx/wiki). 
+
+Please note that the [code](https://github.com/carloLV/ROS-TiPlEx) related to the wiki is outdated and not mantained anymore.
