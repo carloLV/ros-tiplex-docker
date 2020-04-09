@@ -37,7 +37,8 @@ class BackRobotSide:
 		"""
 		#Write to db
 		db = mongodb_interface.MongoDBInterface()
-		db.write_robot_sv(data, "robot_side") ## Label for reading
+		state_vars = data.data
+		db.write_robot_sv(numpy.array(state_vars, dtype=numpy.str), "robot_side") ## Label for reading
 
 	def build_string(self, msg_topic_list):
 		"""

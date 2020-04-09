@@ -4,7 +4,7 @@
 
 <!-- Bring up the husky on Gazebo in the predefined world; world will be changed, according on test purposes-->
 <include file="$(find husky_gazebo)/launch/husky_playpen.launch">
-		<!-- Run husky with kinect active 
+		<!-- Run husky with kinect active
 		Run both kinect and ur5 arm seems impossible on Gazebo, due to compatibility issues -->
 		<arg name="kinect_enabled" value="true" />
 		<arg name="ur5_enabled" value="false"/>
@@ -29,8 +29,8 @@
 	<node name="photo_handler" pkg="tbot_testing_env" type="photo_handler.py" respawn="true" />
 
 
-	<!-- Bring up Rviz to send move_base_simple/Goal to the robot and monitor moving-->
+	<!-- Bring up Rviz to send move_base_simple/Goal to the robot and monitor moving
 	<include file="$(find husky_viz)/launch/view_robot.launch">
-	</include>
+	</include>-->
 	<!-- To save map:  $ rosrun map_server map_saver -f <filename>-->
 </launch>
