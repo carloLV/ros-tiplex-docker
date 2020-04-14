@@ -24,7 +24,7 @@ class BackPlannerSide:
 		rate=rospy.Rate(10)
 		print 'Publishing... ...'
 		while not rospy.is_shutdown():
-			self._pub.publish(message[0])
+			self._pub.publish(message)
 			rate.sleep()
 
 	def on_data_passing(self, data):
@@ -32,10 +32,8 @@ class BackPlannerSide:
 		Callback for the subscribed topic. Receives data from js client and saves the configuration on mongoDB using label @planner_side
 			@params: RosMessage of type StringArray
 		"""
-
-		#Write to db
-		db = mongodb_interface.MongoDBInterface()
-		db.write_robot_sv(data, "planner_side") ## Label for reading
+		state_vars = data.data
+		self._db.write_robot_sv(numpy.array(state_vars, dtype=numpy.str), "planner_side") ## Label for reading
 
 	def run_node(self):
 		rospy.init_node('back_planner_side',anonymous=True)

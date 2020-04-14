@@ -8,13 +8,9 @@ import mongodb_interface
 import json
 import sys
 
-#filename should be passed by command line
-if len(sys.argv) != 3:
-	print 'Usage: rosrun robot_knowledge_base ddl_generator.py your_file_name your_time_horizon'
-	sys.exit(0)
-else: 
-	filename = sys.argv[1]
-	horizon = sys.argv[2]
+#filename should be passed or default will be used
+filename = rospy.get_param('/ddl_generator/filename')
+horizon = rospy.get_param('/ddl_generator/horizon')
 
 class DDLGenerator:
 	"""
@@ -34,7 +30,7 @@ class DDLGenerator:
 		Reads data using the mongoDBInterface and return only the portion strictly needed for operations.
 		"""
 		message = self._db.read_robot_sv("planner_side")
-		return message[0].data
+		return message
 
 	def append_state_var2file(self, state_var):
 		"""
@@ -82,8 +78,8 @@ class DDLGenerator:
 			description +='\tMEETS {\n'
 			for m in el.get_meets():
 				description += '\t\t'+m+'\n'
-			description +='\t}\n' 
-		return state_var_declaration+description+'\n}\n'	
+			description +='\t}\n'
+		return state_var_declaration+description+'\n}\n'
 
 	def append_sync_rules(self):
 		dictionary = {} #key: State Variable, values: all sync rule associated
@@ -107,7 +103,7 @@ class DDLGenerator:
 				rule_type = elements[3]
 				all_rules+='\n\tVALUE '+main_state+'()\n\t{\n\tcd0 '+secondary_sv+'.'+secondary_state+'();\n\n\t'+rule_type+'[0?,+INF?];\n\t}\n'
 			all_rules+='\n}'
-		return all_rules+'\n}' 
+		return all_rules+'\n}'
 
 	def append_timeline(self):
 		all_timeline=''
@@ -126,7 +122,7 @@ class DDLGenerator:
 		all_timeline = self.append_timeline()
 		try:
 			self._domain_file = open('./'+filename+'.ddl', 'a')
-			self._domain_file.write('DOMAIN '+filename.upper()+'_Domain\n{\n\tTEMPORAL_MODULE temporal_module=[0,'+horizon+'],'+horizon+';\n')
+			self._domain_file.write('DOMAIN '+filename.upper()+'_Domain\n{\n\tTEMPORAL_MODULE temporal_module=[0,'+str(horizon)+'],'+str(horizon)+';\n')
 			self._domain_file.write(all_state_var)
 			self._domain_file.write(all_timeline)
 			self._domain_file.write(all_sync_rules)

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+	<!-- Launch the node between the web interface and ROS system on planner side.-->
+	<node name="ddl_generator" pkg="robot_knowledge_base" type="ddl_generator.py" respawn="false" output="screen">
+    <param name="filename" value="default_domain" />
+    <param name="horizon" value="230" />
+	</node>
+
+</launch>

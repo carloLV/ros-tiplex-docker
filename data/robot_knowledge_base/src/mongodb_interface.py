@@ -46,4 +46,4 @@ class MongoDBInterface:
 		with io.open(os.path.join(self._curr_dir, file_path), 'r', encoding='utf-8') as f:
 			 for line in f:
 				 info.append(str(line.strip()))
-		return np.array(info)
+		return info
