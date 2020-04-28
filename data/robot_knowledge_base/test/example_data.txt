@@ -1,0 +1,100 @@
+{   "stateVar":"FilterPhoto",
+   "flag":"edited",
+   "states":[      {
+         "id":"IdleF",
+         "controlTag":"c",
+         "durability":"",
+         "is_initial":true
+
+},
+      {
+         "id":"Filter",
+         "controlTag":"c",
+         "durability":"",
+         "is_initial":false
+
+}
+
+],
+   "links":[      {
+         "source":"IdleF",
+         "target":"Filter",
+         "topic":"/camera/photo/filtering",
+         "message":"std_msgs/Int32\n",
+         "type":"pub"
+
+},
+      {
+         "source":"Filter",
+         "target":"IdleF",
+         "topic":"/camera/photo/feedback",
+         "message":"std_msgs/Int32\n",
+         "type":"sub"
+
+}
+
+]
+}{   "stateVar":"MoveAndPhoto",
+   "flag":"edited",
+   "states":[      {
+         "id":"Idle",
+         "controlTag":"c",
+         "durability":"",
+         "is_initial":true
+
+},
+      {
+         "id":"Movement",
+         "controlTag":"u",
+         "durability":"4-56",
+         "is_initial":false
+
+},
+      {
+         "id":"Photo",
+         "controlTag":"c",
+         "durability":"1-5",
+         "is_initial":false
+
+}
+
+],
+   "links":[      {
+         "source":"Idle",
+         "target":"Movement",
+         "topic":"/move_base_simple/goal",
+         "message":"geometry_msgs/PoseStamped\n",
+         "type":"pub"
+
+},
+      {
+         "source":"Movement",
+         "target":"Idle",
+         "topic":"/move_base/feedback",
+         "message":"move_base_msgs/MoveBaseActionFeedback\n",
+         "type":"sub"
+
+},
+      {
+         "source":"Movement",
+         "target":"Photo",
+         "topic":"/camera/photo/saving",
+         "message":"std_msgs/Int32\n",
+         "type":"pub"
+
+},
+      {
+         "source":"Photo",
+         "target":"Movement",
+         "topic":"/camera/photo/feedback",
+         "message":"std_msgs/Int32\n",
+         "type":"sub"
+
+}
+
+],
+   "syncRule":[
+      "MoveAndPhoto -> Photo BEFORE FilterPhoto -> Filter"
+
+]
+}

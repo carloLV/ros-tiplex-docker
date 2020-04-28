@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+
 from std_msgs.msg import String
 from robot_knowledge_base.msg import StringArray
 import rospy
@@ -16,7 +17,7 @@ class DDLGenerator:
 	"""
 	This node is the layer 3 of the planning system.
 	Reads value from mongoDB using the label @planner_side. The extracted info are relative to the State Variables
-	the planning expert has reviewd and modified to better suit the EPSL paradigm.
+	the planning expert has reviewed and modified to better suit the EPSL paradigm.
 	Then the info are used to create a @ddl file that will be used to configure the domain.
 	"""
 
@@ -127,11 +128,10 @@ class DDLGenerator:
 			self._domain_file.write(all_timeline)
 			self._domain_file.write(all_sync_rules)
 			#self._domain_file.write('\n\t}\n}')
-			rospy.loginfo('Wrote on file with SUCCESS, Exiting ...')
+			rospy.loginfo('DDL has been written on disk with SUCCESS, Exiting ...')
 			sys.exit(0)
 		except IOError:
 			rospy.loginfo('Unable to open or write in ddl file.')
-		rospy.spin()
 
 
 class DDLStateVarStructure:

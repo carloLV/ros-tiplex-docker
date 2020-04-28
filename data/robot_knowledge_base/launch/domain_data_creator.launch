@@ -1,9 +1,16 @@
 <?xml version="1.0"?>
 <launch>
+
+	<arg name="horizon" default="230"/>
+	<arg name="filename" default="default_domain"/>
+	<arg name="xmlname" default="default_roxanne"/>
 	<!-- Launch the node between the web interface and ROS system on planner side.-->
 	<node name="ddl_generator" pkg="robot_knowledge_base" type="ddl_generator.py" respawn="false" output="screen">
-    <param name="filename" value="default_domain" />
-    <param name="horizon" value="230" />
+    <param name="filename" value="$(arg filename)" />
+    <param name="horizon" value="$(arg horizon)" />
 	</node>
 
+	<node name="roxanne_xml_creator" pkg="robot_knowledge_base" type="roxanne_xml_creator.py" respawn="false" output="screen">
+    <param name="xmlname" value="$(arg xmlname)" />
+	</node>
 </launch>

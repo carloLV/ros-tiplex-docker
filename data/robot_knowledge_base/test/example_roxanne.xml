@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Example of 1 state var of 2 tokens -->
+
+<ros host="ws://192.168.1.7:9090">
+
+  <command name="Filter" component="FilterPhoto">
+
+		<dispatch-topic
+			name="/camera/photo/saving"
+			msg="/camera/photo/filtering"
+			publisher="Insert java classpath here" />
+
+		<feedback-topic
+			name="/default_FilterPhoto_feedback"
+			msg="std_msgs/String"
+			delegate="it.cnr.istc.pst.ros.roxanne.platform.rosbridge.std.StdStringCommadnFeedbackListener" />
+
+	</command>
+
+  <command name="Movement" component="MoveAndPhoto">
+
+		<dispatch-topic
+			name="/move_base_simple/goal"
+			msg="/geometry_msgs/PoseStamped"
+			publisher="Insert java classpath here" />
+
+		<feedback-topic
+			name="/default_MoveAndPhoto_feedback"
+			msg="std_msgs/String"
+			delegate="it.cnr.istc.pst.ros.roxanne.platform.rosbridge.std.StdStringCommadnFeedbackListener" />
+
+	</command>
+
+  <command name="Photo" component="MoveAndPhoto">
+
+		<dispatch-topic
+			name="/camera/photo/saving"
+			msg="std_msgs/Int32\"
+			publisher="Insert java classpath here" />
+
+		<feedback-topic
+			name="/default_MoveAndPhoto_feedback"
+			msg="std_msgs/String"
+			delegate="it.cnr.istc.pst.ros.roxanne.platform.rosbridge.std.StdStringCommadnFeedbackListener" />
+
+	</command>
+
+</ros>
